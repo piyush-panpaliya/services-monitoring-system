@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '13338:80'
+    volumes:
+      - ./instance:/app/instance
+      - /etc/nginx/sites-enabled:/app/nginx-sites-enabled
+    restart: on-failure:5
+
+networks:
+  default:
+    name: saic-default
+    driver: bridge
+    external: true

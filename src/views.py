@@ -25,7 +25,7 @@ def servicesRoute():
   ans = getAllServices()
   if ans == None:
     return "processing, please revisit after some time"
-  return render_template("index.html", services=ans)
+  return render_template("index.html", services=ans, loggedIn=session.get("user", None) != None)
 
 
 @views.route('/service/<name>', methods=['GET'])
@@ -55,7 +55,7 @@ def serviceRoute(name):
   graph_data.reverse()
   if ans == None:
     return "processing..."
-  return render_template("service.html", service={**ans, 'graph': graph_data})
+  return render_template("service.html", service={**ans, 'graph': graph_data}, loggedIn=session.get("user", None) != None)
 
 
 @views.route('/api/update', methods=['GET'])

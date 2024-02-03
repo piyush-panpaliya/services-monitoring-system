@@ -59,7 +59,7 @@ def checkStatus(inp):
   except:
     print("issue with connction via port, status:\n", status)
 
-  if 200 <= status['dnsStatus'] < 300 and 200 <= status['dockerStatus'] < 300:
+  if 200 <= status['dnsStatus'] < 300 and 200 <= status['dockerStatus'] < 600:
     status['remark'] = "UP"
     latestDownTime = oldDownTime.pop() if len(oldDownTime) > 0 else None
     if latestDownTime != None and latestDownTime.get('endTime', None) == None:
@@ -90,11 +90,11 @@ def cronCall():
   services = []
   statusAll = []
   try:
-    with open('status.json') as json_file:
+    with open('instance/status.json') as json_file:
       oldStatus = json.load(json_file)['services']
   except:
     print("issue with loading old status, assuming no status")
-  with open('services.json') as json_file:
+  with open('instance/services.json') as json_file:
     services = json.load(json_file)['services']
 
   num_threads = min(4, len(services))
@@ -108,7 +108,7 @@ def cronCall():
     coloredPrint("\n scanned all websites at " +
                  datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " \n", BLUE)
 
-  with open('status.json', 'w') as outfile:
+  with open('instance/status.json', 'w') as outfile:
     json.dump({"services": statusAll}, outfile, indent=2)
 
 

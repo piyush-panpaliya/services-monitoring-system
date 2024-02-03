@@ -9,6 +9,8 @@ def scrap():
   files = os.listdir(os.environ["NGINX_CONF_PATH"])
 
   for file in files:
+    if file == "default":
+      continue
     ser = {'dns': "", 'port': ""}
     with open("nginx-sites-enabled/" + file) as f:
       for line in f:
@@ -23,8 +25,8 @@ def scrap():
     x["port"])} for x in services if x['port'].isnumeric()]
   services.sort(key=lambda x: x['port'])
 
-  with open("services.json", "w") as f:
+  with open("instance/services.json", "w") as f:
     json.dump({'services': services}, f, indent=2)
 
 
-# scrap()
+scrap()
