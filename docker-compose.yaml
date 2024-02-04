@@ -7,7 +7,7 @@ services:
     ports:
       - '13338:80'
     volumes:
-      - ./instance:/app/instance
+      - ../instance:/app/instance
       - /etc/nginx/sites-enabled:/app/nginx-sites-enabled
     restart: on-failure:5
 

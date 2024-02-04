@@ -116,7 +116,7 @@ def webhook(inpType, inp):
   try:
     result.raise_for_status()
   except requests.exceptions.HTTPError as err:
-    print(err)
+    print("failed to post dicord MSG")
   else:
     print("Payload delivered successfully, code {}.".format(result.status_code))
     if "template" in data:
