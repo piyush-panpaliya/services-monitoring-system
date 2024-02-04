@@ -8,7 +8,7 @@ services:
       - '13338:80'
     volumes:
       - ../instance:/app/instance
-      - /etc/nginx/sites-enabled:/app/nginx-sites-enabled
+      # - /etc/nginx/sites-enabled:/app/nginx-sites-enabled
     restart: on-failure:5
 
 networks:

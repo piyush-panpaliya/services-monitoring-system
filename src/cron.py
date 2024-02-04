@@ -69,8 +69,11 @@ def checkStatus(inp):
       slicer = min(20, len(newDownTime) - 1)
       newDownTime = newDownTime[-slicer:]
       status['downTime'] = newDownTime
-      webhook(
-        "up", {"name": status['name'], "port": status['port'], "dns": service['dns']})
+      try:
+        webhook(
+            "up", {"name": status['name'], "port": status['port'], "dns": service['dns']})
+      except:
+        print("dicord err")
   else:
     status['remark'] = "DOWN"
     if len(oldDownTime) == 0 or oldDownTime[-1].get('endTime', None) != None:
@@ -79,8 +82,11 @@ def checkStatus(inp):
       slicer = min(20, len(newDownTime) - 1)
       newDownTime = newDownTime[-slicer:]
       status['downTime'] = newDownTime
-      webhook(
-        "down", {"name": status['name'], "port": status['port'], "dns": service['dns']})
+      try:
+        webhook(
+            "down", {"name": status['name'], "port": status['port'], "dns": service['dns']})
+      except:
+        print("dicord err")
     coloredPrint("DOWN: " + status['link'], RED)
   return status
 
